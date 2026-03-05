@@ -1,38 +1,33 @@
 import cv2 as cv
-import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import os
 
-
 output_directory = 'results'
-if not os.path.exists(output_directory):
-    os.makedirs(output_directory)
+if not os.path.exists(output_directory): os.makedirs(output_directory)
 
 # create a histogram
-def hist(image_to_process):
+def hist(image):
     hist = [0] * 256
-    row = image_to_process.shape[0]  # image 高度
-    col = image_to_process.shape[1]  # image 寬度
+    row = image.shape[0]
+    col = image.shape[1]
     for i in range(row):
-        for j in range(col):
-            hist[image_to_process[i, j, 0]] += 1
+        for j in range(col): hist[image[i, j, 0]] += 1
     return hist
 
 # intensity divided by 3
-def div_3(image_to_process):
-    row = image_to_process.shape[0]  # image 高度
-    col = image_to_process.shape[1]  # image 寬度
+def div_3(image):
+    row = image.shape[0]
+    col = image.shape[1]
     for i in range(row):
         for j in range(col):
-            for k in range(3):
-                image_to_process[i, j, k] = image_to_process[i, j, k] / 3
-    return image_to_process
+            for k in range(3): image[i, j, k] = image[i, j, k] / 3
+    return image
 
 # histogram equalization
-def image_equ(image_to_process, hist):
-    row = image_to_process.shape[0]  # image 高度
-    col = image_to_process.shape[1]  # image 寬度
+def image_equ(image, hist):
+    row = image.shape[0]
+    col = image.shape[1]
 
     min_val = sys.maxsize
     max_val = 0
@@ -49,10 +44,9 @@ def image_equ(image_to_process, hist):
     for i in range(row):
         for j in range(col):
             for k in range(3):
-                a = cdf_hist[image_to_process[i, j, k]]
-                image_to_process[i, j, k] = ((a - cdf_min) / (cdf_max - cdf_min)) * 255
-
-    return image_to_process
+                a = cdf_hist[image[i, j, k]]
+                image[i, j, k] = ((a - cdf_min) / (cdf_max - cdf_min)) * 255
+    return image
 
 # (a) original image and its histogram
 image1 = cv.imread('lena.bmp')
