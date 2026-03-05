@@ -46,24 +46,28 @@ cv.imshow('origianl image', image)
 cv.waitKey(0)
 
 # part 1.(a)
+image = cv.imread('lena.bmp')
 image_upside_down = image_upside_down(image)
 cv.imwrite(os.path.join(output_directory, 'HW1_part1.(a)_image_upside_down.jpg'), image_upside_down)
 cv.imshow('HW1_part1.(a)_image_upside_down', image_upside_down)
 cv.waitKey(0)
 
 # part 1.(b)
+image = cv.imread('lena.bmp')
 image_right_side_left = image_right_side_left(image)
 cv.imwrite(os.path.join(output_directory, 'HW1_part1.(b)_image_right_side_left.jpg'), image_right_side_left)
 cv.imshow('HW1_part1.(b)_image_right_side_left', image_right_side_left)
 cv.waitKey(0)
 
 # part 1.(c)
+image = cv.imread('lena.bmp')
 image_diagonally_flip = image_diagonally_flip(image)
 cv.imwrite(os.path.join(output_directory, 'HW1_part1.(c)_image_diagonally_flip.jpg'), image_diagonally_flip)
 cv.imshow('HW1_part1.(c)_image_diagonally_flip', image_diagonally_flip)
 cv.waitKey(0)
 
 # part 2.(d) rotate lena.bmp 45 degrees clockwise
+image = cv.imread('lena.bmp')
 row = image.shape[0]
 col = image.shape[1]
 center = (row / 2, col / 2)
@@ -74,12 +78,14 @@ cv.imshow('HW1_part2.(d)_rotate lena.bmp 45 degrees clockwise', image_rotated)
 cv.waitKey(0)
 
 # part 2.(e) shrink lena.bmp in half
+image = cv.imread('lena.bmp')
 image_shrink = cv.resize(image, (row // 2, col // 2)) #函式 cv.resize
 cv.imwrite(os.path.join(output_directory, 'HW1_part2.(e)_image_shrink.jpg'), image_shrink)
 cv.imshow('HW1_part2.(e)_shrink lena.bmp in half', image_shrink)
 cv.waitKey(0)
 
 # part 2.(f) binarize lena.bmp at 128 to get a binary image
+image = cv.imread('lena.bmp')
 retVal, image_binarize = cv.threshold(image, 127, 255, cv.THRESH_BINARY) #函式 cv.threshold
 cv.imwrite(os.path.join(output_directory, 'HW1_part2.(f)_image_binarize.jpg'), image_binarize)
 cv.imshow('HW1_part2.(f)_binarize lena.bmp at 128 to get a binary image', image_binarize)
