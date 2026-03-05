@@ -51,13 +51,10 @@ def connected_components(image, min_area=500):
                 if label_above == 0 and label_left == 0:
                     labels[row, col] = current_label
                     current_label += 1
-                elif label_above != 0 and label_left == 0:
-                    labels[row, col] = label_above
-                elif label_above == 0 and label_left != 0:
-                    labels[row, col] = label_left
+                elif label_above != 0 and label_left == 0: labels[row, col] = label_above
+                elif label_above == 0 and label_left != 0: labels[row, col] = label_left
                 else:  # label_above != 0 and label_left != 0
-                    if label_above == label_left:
-                        labels[row, col] = label_above
+                    if label_above == label_left: labels[row, col] = label_above
                     else:
                         # 合併不同 label
                         label_to_keep = label_left
@@ -69,8 +66,7 @@ def connected_components(image, min_area=500):
     max_possible_labels = height * width
     area_count = np.zeros(max_possible_labels, dtype=int)
     for row in range(height):
-        for col in range(width):
-            area_count[labels[row, col]] += 1
+        for col in range(width): area_count[labels[row, col]] += 1
 
     # 3. 畫 bounding box + centroid
     for component_id in range(1, max_possible_labels):
